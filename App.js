@@ -6,13 +6,13 @@ import {
 	createBottomTabNavigator
 } from "react-navigation";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import decksReducer from "./reducers/decks-reducer";
+import Actions from "./actions";
+import DeckList from "./components/DeckList";
 
-const DecksList = props => (
-	<View style={styles.container}>
-		<Text>Decks List goes here</Text>
-	</View>
-);
+const middleware = applyMiddleware(thunk);
 
 const AddDeck = props => (
 	<View style={styles.container}>
@@ -21,8 +21,8 @@ const AddDeck = props => (
 );
 
 const bottomNavigator = createBottomTabNavigator({
-	DecksList: {
-		screen: DecksList,
+	DeckList: {
+		screen: DeckList,
 		navigationOptions: {
 			tabBarLabel: "Decks"
 		}
@@ -47,14 +47,21 @@ const AppNavigator = createStackNavigator({
 
 const AppContainer = createAppContainer(AppNavigator);
 
-function reducer(state = {}, action) {
-	return state;
-}
+const reducer = combineReducers({
+	decks: decksReducer
+});
 
 export default class App extends React.Component {
+	store = createStore(reducer, {}, middleware);
+
+	componentDidMount() {
+		Actions.populateDecks()(this.store.dispatch);
+	}
+
 	render() {
+		console.log(this.state);
 		return (
-			<Provider store={createStore(reducer)}>
+			<Provider store={this.store}>
 				<AppContainer />
 			</Provider>
 		);
