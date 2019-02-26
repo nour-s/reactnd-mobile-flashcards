@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	StatusBar,
+	Platform,
+	ToolbarAndroid
+} from "react-native";
+import { Constants } from "expo";
 import {
 	createAppContainer,
 	createStackNavigator,
@@ -59,10 +67,33 @@ export default class App extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
 		return (
 			<Provider store={this.store}>
-				<AppContainer />
+				<View>
+					<StatusBar
+						translucent
+						backgroundColor="rgba(0, 0, 0, 0.24)"
+						animated
+					/>
+					{Platform.OS === "android" && Platform.Version >= 20 ? (
+						<View
+							style={{
+								height: 24,
+								backgroundColor: "#512DA8"
+							}}
+						/>
+					) : null}
+					<ToolbarAndroid
+						style={{
+							height: 56,
+							backgroundColor: "#673AB7",
+							elevation: 4
+						}}
+						titleColor="white"
+						title="Flashcards"
+					/>
+				</View>
+				<AppContainer style={styles.container} />
 			</Provider>
 		);
 	}

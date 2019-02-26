@@ -43,6 +43,49 @@ const initData = {
 					isCorrect: true
 				}
 			]
+		},
+		TypeScript: {
+			title: "TypeScript",
+			questions: [
+				{
+					question: "Who developed and designed TypeScript?",
+					answer: "Amazon",
+					isCorrect: false
+				},
+				{
+					question:
+						"When was the first time TypeScript was made public?",
+					answer: "October 2012",
+					isCorrect: true
+				},
+				{
+					question:
+						"Which of the following is a filename extension for typescript?",
+					answer: "tt",
+					isCorrect: false
+				}
+			]
+		},
+		Angular: {
+			title: "Angular",
+			questions: [
+				{
+					question: "The Angular 4 features:",
+					answer: "Ng-template",
+					isCorrect: true
+				},
+				{
+					question: "The AngularJS is based on?",
+					answer: "MVVM",
+					isCorrect: false
+				},
+				{
+					question:
+						"Angular 4 applications are usually small because it uses",
+					answer: "TypeScript 2.2",
+					isCorrect: true
+				}
+			]
 		}
 	}
 };
