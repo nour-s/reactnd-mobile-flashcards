@@ -19,6 +19,7 @@ import thunk from "redux-thunk";
 import decksReducer from "./reducers/decks-reducer";
 import Actions from "./actions";
 import DeckList from "./components/DeckList";
+import DeckView from "./components/DeckView";
 
 const middleware = applyMiddleware(thunk);
 
@@ -50,6 +51,9 @@ const AppNavigator = createStackNavigator({
 		navigationOptions: {
 			header: null
 		}
+	},
+	DeckView: {
+		screen: DeckView
 	}
 });
 

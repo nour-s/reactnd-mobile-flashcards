@@ -2834,7 +2834,7 @@ has-values@^1.0.0:
     is-number "^3.0.0"
     kind-of "^4.0.0"
 
-hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.2.1, hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
@@ -4622,6 +4622,13 @@ react-navigation-drawer@1.2.0:
   integrity sha512-78idNMJpOGzn0jHej69yTIiqJWdCVdMy2sBtppcdnT+DHeZXQDamTuGurjluf/2WyNB2xAXipIk4N4NnvqRfvw==
   dependencies:
     react-native-tab-view "^1.2.0"
+
+react-navigation-props-mapper@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-props-mapper/-/react-navigation-props-mapper-0.4.0.tgz#9d18625699ca841dc321322e57fb215c5db35440"
+  integrity sha512-nGK+UU8tZaBFEm4FALnuhjSNRhaxGdCS4U7/i89fKadRCu5sFUVfiXdTTG9lUPVZTFqfekOxti4y/24pz/oHfg==
+  dependencies:
+    hoist-non-react-statics "^2.2.1"
 
 react-navigation-stack@1.0.10:
   version "1.0.10"
