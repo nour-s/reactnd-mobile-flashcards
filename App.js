@@ -7,7 +7,6 @@ import {
 	Platform,
 	ToolbarAndroid
 } from "react-native";
-import { Constants } from "expo";
 import {
 	createAppContainer,
 	createStackNavigator,
@@ -20,6 +19,7 @@ import decksReducer from "./reducers/decks-reducer";
 import Actions from "./actions";
 import DeckList from "./components/DeckList";
 import DeckView from "./components/DeckView";
+import AddCard from "./components/AddCard";
 
 const middleware = applyMiddleware(thunk);
 
@@ -54,6 +54,9 @@ const AppNavigator = createStackNavigator({
 	},
 	DeckView: {
 		screen: DeckView
+	},
+	AddCard: {
+		screen: AddCard
 	}
 });
 

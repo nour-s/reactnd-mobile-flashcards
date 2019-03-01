@@ -3,8 +3,27 @@ import * as ActionTypes from "../actions/constants";
 export default function decksReducer(state = {}, action) {
 	switch (action.type) {
 		case ActionTypes.DECKS_POPULATE:
-			state = { ...state, ...action.payload };
+			state = { ...action.payload };
 			break;
+		case ActionTypes.DECKS_ADD_CARD:
+			const card = action.payload;
+			const deck = { ...state[card.deckId] };
+			deck.questions = [...deck.questions, card];
+			newstate = {
+				...state,
+				[deck.id]: deck
+			};
+			return newstate;
+		case ActionTypes.DECKS_CREATE:
+			newstate = {
+				...state,
+				FAKE: {
+					id: "FAKE",
+					title: "FAKE",
+					questions: []
+				}
+			};
+			return newstate;
 		default:
 			break;
 	}

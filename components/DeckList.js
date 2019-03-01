@@ -11,8 +11,7 @@ class DeckList extends Component {
 				<TouchableOpacity
 					onPress={() =>
 						this.props.navigation.navigate("DeckView", {
-							entryId: key,
-							deck: decks[key]
+							deckId: key
 						})
 					}
 					style={styles.deck}
@@ -21,7 +20,9 @@ class DeckList extends Component {
 					<View key={key}>
 						<Text style={styles.deckTitle}>{deck.title}</Text>
 						<Text style={styles.deckTitle}>
-							{`Cards: ${deck.questions.length}`}
+							{`Cards: ${
+								deck.questions ? deck.questions.length : 0
+							}`}
 						</Text>
 					</View>
 				</TouchableOpacity>

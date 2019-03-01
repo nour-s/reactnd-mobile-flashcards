@@ -1,17 +1,27 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 import { withMappedNavigationProps } from "react-navigation-props-mapper";
 
 class DeckView extends Component {
 	render() {
-		const { deck } = this.props;
+		const { deckId, decks } = this.props;
+		const deck = decks[deckId];
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>{deck.title}</Text>
 				<Text style={styles.cardNubmer}>{`Cards: ${
-					deck.questions.length
+					deck.questions ? deck.questions.length : 0
 				}`}</Text>
-				<TouchableOpacity style={styles.addCard}>
+				<TouchableOpacity
+					style={styles.addCard}
+					onPress={() =>
+						this.props.navigation.navigate("AddCard", {
+							deckId: deck.id,
+							deckTitle: deck.title
+						})
+					}
+				>
 					<Text style={styles.addCardText}>Add Card</Text>
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.addCard}>
@@ -50,4 +60,8 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withMappedNavigationProps()(DeckView);
+mapStateToProps = state => ({
+	decks: state.decks
+});
+
+export default withMappedNavigationProps()(connect(mapStateToProps)(DeckView));

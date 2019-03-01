@@ -11,4 +11,15 @@ function populateDecks() {
 		});
 }
 
-export default { populateDecks };
+function addCard(card) {
+	return dispatch => {
+		API.addCard(card).then(() => {
+			dispatch({
+				type: ActionTypes.DECKS_ADD_CARD,
+				payload: card
+			});
+		});
+	};
+}
+
+export default { addCard, populateDecks };

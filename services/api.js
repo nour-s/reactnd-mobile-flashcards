@@ -1,9 +1,11 @@
 import { AsyncStorage } from "react-native";
 const DECKS_STORAGE_KEY = "DECKS_STORAGE";
+let currentDecksList;
 
 const initData = {
 	decks: {
 		React: {
+			id: "React",
 			title: "React",
 			questions: [
 				{
@@ -19,6 +21,7 @@ const initData = {
 			]
 		},
 		JavaScript: {
+			id: "JavaScript",
 			title: "JavaScript",
 			questions: [
 				{
@@ -45,6 +48,7 @@ const initData = {
 			]
 		},
 		TypeScript: {
+			id: "TypeScript",
 			title: "TypeScript",
 			questions: [
 				{
@@ -67,6 +71,7 @@ const initData = {
 			]
 		},
 		Angular: {
+			id: "Angular",
 			title: "Angular",
 			questions: [
 				{
@@ -91,9 +96,36 @@ const initData = {
 };
 
 function getDecks() {
+	return currentDecksList
+		? Promise.resolve(currentDecksList)
+		: loadDecksFromStorage().catch(er => console.error(er));
+}
+
+function loadDecksFromStorage() {
 	return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(result => {
-		return result || initData.decks;
+		result = JSON.parse(result);
+		return Promise.resolve(
+			result || (saveDecksToStorage(initData.decks), initData.decks)
+		);
 	});
 }
 
-export default { getDecks };
+function saveDecksToStorage(decks) {
+	decks = JSON.stringify(decks);
+	return AsyncStorage.setItem(DECKS_STORAGE_KEY, decks);
+}
+
+function addCard(card) {
+	return getDecks()
+		.then(decks => {
+			let updatedDecks = { ...decks };
+			let deck = updatedDecks[card.deckId];
+			deck.questions = [...deck.questions, card];
+			saveDecksToStorage(updatedDecks).then(() => {
+				currentDecksList = { ...updatedDecks };
+			});
+		})
+		.catch(err => console.log("I'm catching: ", err));
+}
+
+export default { getDecks, addCard };
