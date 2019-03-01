@@ -14,12 +14,13 @@ export default function decksReducer(state = {}, action) {
 				[deck.id]: deck
 			};
 			return newstate;
-		case ActionTypes.DECKS_CREATE:
+		case ActionTypes.DECKS_CREATE_NEW:
+			const id = action.payload.deckName;
 			newstate = {
 				...state,
-				FAKE: {
-					id: "FAKE",
-					title: "FAKE",
+				[id]: {
+					id,
+					title: id,
 					questions: []
 				}
 			};

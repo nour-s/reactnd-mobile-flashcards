@@ -1,3 +1,3 @@
 export const DECKS_POPULATE = "DECKS_POPULATE";
 export const DECKS_ADD_CARD = "DECKS_ADD_CARD ";
-export const DECKS_CREATE = "DECKS_CREATE";
+export const DECKS_CREATE_NEW = "DECKS_CREATE_NEW";

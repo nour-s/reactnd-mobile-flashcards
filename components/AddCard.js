@@ -29,10 +29,6 @@ class AddCard extends Component {
 		this.props.navigation.goBack();
 	};
 
-	componentDidUpdate() {
-		this.props.dispatch({ type: "DECKS_CREATE" });
-	}
-
 	render() {
 		const { deckTitle } = this.props;
 		return (
@@ -110,17 +106,13 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapDispatchToProps = dispatch => {
-	return {
-		...bindActionCreators(
-			{
-				addCard: Actions.addCard
-			},
-			dispatch
-		),
+const mapDispatchToProps = dispatch =>
+	bindActionCreators(
+		{
+			addCard: Actions.addCard
+		},
 		dispatch
-	};
-};
+	);
 
 export default withMappedNavigationProps()(
 	connect(

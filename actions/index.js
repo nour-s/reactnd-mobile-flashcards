@@ -22,4 +22,12 @@ function addCard(card) {
 	};
 }
 
-export default { addCard, populateDecks };
+function addDeck(deckName) {
+	return dispatch => {
+		dispatch({
+			type: ActionTypes.DECKS_CREATE_NEW,
+			payload: { deckName }
+		});
+	};
+}
+export default { addDeck, addCard, populateDecks };

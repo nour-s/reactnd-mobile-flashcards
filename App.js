@@ -20,15 +20,9 @@ import Actions from "./actions";
 import DeckList from "./components/DeckList";
 import DeckView from "./components/DeckView";
 import AddCard from "./components/AddCard";
+import AddDeck from "./components/AddDeck";
 
 const middleware = applyMiddleware(thunk);
-
-const AddDeck = props => (
-	<View style={styles.container}>
-		<Text>Add new deck goes here</Text>
-	</View>
-);
-
 const bottomNavigator = createBottomTabNavigator({
 	DeckList: {
 		screen: DeckList,
@@ -39,8 +33,7 @@ const bottomNavigator = createBottomTabNavigator({
 	AddDeck: {
 		screen: AddDeck,
 		navigationOptions: {
-			tabBarLabel: "Add Deck",
-			header: null
+			tabBarLabel: "Add Deck"
 		}
 	}
 });
