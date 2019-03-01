@@ -21,6 +21,7 @@ import DeckList from "./components/DeckList";
 import DeckView from "./components/DeckView";
 import AddCard from "./components/AddCard";
 import AddDeck from "./components/AddDeck";
+import Quiz from "./components/Quiz";
 
 const middleware = applyMiddleware(thunk);
 const bottomNavigator = createBottomTabNavigator({
@@ -50,6 +51,12 @@ const AppNavigator = createStackNavigator({
 	},
 	AddCard: {
 		screen: AddCard
+	},
+	Quiz: {
+		screen: Quiz,
+		navigationOptions: {
+			tabBarLabel: "Quiz"
+		}
 	}
 });
 

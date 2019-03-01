@@ -20,7 +20,7 @@ class AddDeck extends Component {
 		const { name } = this.state;
 		this.props.addDeck(name);
 		Keyboard.dismiss();
-		this.props.navigation.goBack();
+		this.props.navigation.navigate("DeckView", { deckId: name });
 	};
 
 	render() {
