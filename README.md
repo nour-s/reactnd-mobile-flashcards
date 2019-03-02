@@ -1,4 +1,4 @@
-# UdaciCards
+# Mobile flashcards
 
 Mobile application (iOS and Android) that allows users to study collections of flashcards.
 The app allow users to create different categories of flashcards called "decks", add flashcards to those decks,
@@ -9,6 +9,7 @@ Built during [Udacity React Nanodegree Program](https://www.udacity.com/course/r
 # Screenshot
 
 <img src="/assets/screenshot.jpg?raw=true" width="200">
+<br/>
 <img src="/assets/screenshot2.jpg?raw=true" width="200">
 
 ## Getting Started via Yarn
@@ -34,4 +35,4 @@ Strongly recommend use Android
 
 ## License
 
-UdaciCards is released under the [WTFPL License](LICENSE)
+Mobile flashcards is released under the [WTFPL License](LICENSE)
