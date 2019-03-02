@@ -81,12 +81,20 @@ class Quiz extends Component {
 
 	renderQuizEnd = () => {
 		const { correctAnswers, incorrectAnswers } = this.state;
+		console.log(this.state);
 		return (
-			<View style={styles.container}>
-				<Text>
-					You answered {correctAnswers} out of
-					{correctAnswers + incorrectAnswers}
-				</Text>
+			<View style={styles.score}>
+				<Text style={styles.scoreCircleText}>You scored:</Text>
+				<View style={styles.scoreCircle}>
+					<Text style={styles.scoreCircleText}>
+						{Math.floor(
+							(correctAnswers /
+								(correctAnswers + incorrectAnswers)) *
+								100
+						)}
+						%
+					</Text>
+				</View>
 				<TextButton
 					style={{
 						wrapper: styles.btnBkg,
@@ -98,7 +106,7 @@ class Quiz extends Component {
 				</TextButton>
 				<TextButton
 					style={{
-						wrapper: [styles.btnBkg, styles.btnShowAnswer],
+						wrapper: styles.btnBkg,
 						text: styles.btnText
 					}}
 					onPress={() => this.props.navigation.goBack()}
@@ -132,8 +140,8 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 10,
 		borderColor: "#eee",
-		marginVertical: 10,
-		marginHorizontal: 10,
+		marginVertical: 20,
+		marginHorizontal: 20,
 		paddingVertical: 20,
 		paddingHorizontal: 20
 	},
@@ -180,6 +188,31 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-around"
+	},
+	score: {
+		flex: 1,
+		alignItems: "center",
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: "#eee",
+		marginVertical: 10,
+		marginHorizontal: 10,
+		paddingVertical: 20,
+		paddingHorizontal: 20
+	},
+	scoreCircle: {
+		alignSelf: "center",
+		alignItems: "center",
+		justifyContent: "center",
+		width: 100,
+		height: 100,
+		borderRadius: 100 / 2,
+		borderWidth: 2,
+		borderColor: "#D81B37"
+	},
+	scoreCircleText: {
+		fontSize: 25,
+		fontWeight: "bold"
 	}
 });
 
