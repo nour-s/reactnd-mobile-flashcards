@@ -23,6 +23,7 @@ import AddCard from "./components/AddCard";
 import AddDeck from "./components/AddDeck";
 import Quiz from "./components/Quiz";
 import Icon from "react-native-vector-icons/Ionicons";
+import { setLocalNotification } from "./utils/helpers";
 
 const middleware = applyMiddleware(thunk);
 const bottomNavigator = createBottomTabNavigator(
@@ -116,6 +117,7 @@ export default class App extends React.Component {
 
 	componentDidMount() {
 		Actions.populateDecks()(this.store.dispatch);
+		setLocalNotification();
 	}
 
 	render() {

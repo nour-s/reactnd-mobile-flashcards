@@ -1,21 +1,34 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 import TextButton from "./TextButton";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 class Quiz extends Component {
-	state = {
-		currentCard: 0,
-		showAnswer: false,
-		correctAnswers: 0,
-		incorrectAnswers: 0
-	};
+	constructor(props) {
+		super(props);
+		const { deck } = props.navigation.state.params;
+		this.state = {
+			currentCard: 0,
+			showAnswer: false,
+			correctAnswers: 0,
+			incorrectAnswers: 0,
+			cardsCount: deck.questions.length
+		};
+	}
 
 	answered = what => {
-		this.setState(state => ({
-			[`${what}Answers`]: state[`${what}Answers`] + 1,
-			showAnswer: false,
-			currentCard: state.currentCard + 1
-		}));
+		this.setState(
+			state => ({
+				[`${what}Answers`]: state[`${what}Answers`] + 1,
+				showAnswer: false,
+				currentCard: state.currentCard + 1
+			}),
+			() => {
+				if (this.state.currentCard > this.state.cardsCount - 1) {
+					clearLocalNotification().then(setLocalNotification);
+				}
+			}
+		);
 	};
 
 	restartQuiz = () =>
@@ -81,7 +94,6 @@ class Quiz extends Component {
 
 	renderQuizEnd = () => {
 		const { correctAnswers, incorrectAnswers } = this.state;
-		console.log(this.state);
 		return (
 			<View style={styles.score}>
 				<Text style={styles.scoreCircleText}>You scored:</Text>
