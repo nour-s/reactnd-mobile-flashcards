@@ -12,12 +12,25 @@ class AddCard extends Component {
 		this.state = {
 			deckId: props.deckId,
 			question: "",
-			answer: ""
+			answer: "",
+			invalidQuestion: false,
+			invalidAnswer: false
 		};
 	}
 
 	handleClick = () => {
 		const card = { ...this.state };
+		// Clear validation.
+		this.setState({ invalidQuestion: false, invalidAnswer: false });
+
+		if (card.question.trim() === "") {
+			this.setState({ invalidQuestion: true });
+			return;
+		} else if (card.answer.trim() === "") {
+			this.setState({ invalidAnswer: true });
+			return;
+		}
+
 		this.props.addCard(card);
 		this.props.navigation.goBack();
 	};
@@ -29,13 +42,19 @@ class AddCard extends Component {
 				<Text style={styles.title}>{deckTitle}</Text>
 				<TextInput
 					placeholder="Enter question"
-					style={styles.textField}
+					style={[
+						styles.textField,
+						this.state.invalidQuestion && styles.invalidField
+					]}
 					value={this.state.question}
 					onChangeText={text => this.setState({ question: text })}
 				/>
 				<TextInput
 					placeholder="Enter answer"
-					style={styles.textField}
+					style={[
+						styles.textField,
+						this.state.invalidAnswer && styles.invalidField
+					]}
 					value={this.state.answer}
 					onChangeText={text => this.setState({ answer: text })}
 				/>
@@ -85,10 +104,16 @@ const styles = StyleSheet.create({
 	},
 	textField: {
 		fontSize: 21,
-		height: 30,
 		borderBottomWidth: 1,
 		borderBottomColor: "#D81B37",
-		marginBottom: 20
+		borderRadius: 5,
+		marginBottom: 20,
+		paddingHorizontal: 5,
+		paddingVertical: 5
+	},
+	invalidField: {
+		borderWidth: 1,
+		borderColor: "#D81B37"
 	}
 });
 

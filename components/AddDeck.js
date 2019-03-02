@@ -14,11 +14,17 @@ import TextButton from "./TextButton";
 
 class AddDeck extends Component {
 	state = {
-		name: ""
+		name: "",
+		invalid: false
 	};
 
 	handleClick = () => {
 		const { name } = this.state;
+		const exist = this.props.decks[name.trim()];
+		if (name.trim() === "" || exist) {
+			this.setState({ invalid: true });
+			return;
+		}
 		this.props.addDeck(name);
 		Keyboard.dismiss();
 		this.props.navigation.navigate("DeckView", { deckId: name });
@@ -29,7 +35,10 @@ class AddDeck extends Component {
 			<KeyboardAvoidingView style={styles.container}>
 				<Text style={styles.title}>What the title of the deck?</Text>
 				<TextInput
-					style={styles.textField}
+					style={[
+						styles.textField,
+						this.state.invalid && styles.invalidField
+					]}
 					placeholder="Deck name"
 					value={this.state.name}
 					onChangeText={text => this.setState({ name: text })}
@@ -61,7 +70,14 @@ const styles = StyleSheet.create({
 		fontSize: 21,
 		borderBottomWidth: 1,
 		borderBottomColor: "#D81B37",
-		marginBottom: 20
+		borderRadius: 5,
+		marginBottom: 20,
+		paddingHorizontal: 5,
+		paddingVertical: 5
+	},
+	invalidField: {
+		borderWidth: 1,
+		borderColor: "#D81B37"
 	},
 	save: {
 		width: 150,
@@ -87,7 +103,11 @@ mapDispatchToProps = dispatch =>
 		dispatch
 	);
 
+mapStateToProps = ({ decks }) => ({
+	decks
+});
+
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(AddDeck);
