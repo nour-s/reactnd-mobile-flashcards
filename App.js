@@ -22,22 +22,47 @@ import DeckView from "./components/DeckView";
 import AddCard from "./components/AddCard";
 import AddDeck from "./components/AddDeck";
 import Quiz from "./components/Quiz";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const middleware = applyMiddleware(thunk);
-const bottomNavigator = createBottomTabNavigator({
-	DeckList: {
-		screen: DeckList,
-		navigationOptions: {
-			tabBarLabel: "Decks"
+const bottomNavigator = createBottomTabNavigator(
+	{
+		DeckList: {
+			screen: DeckList,
+			navigationOptions: {
+				tabBarLabel: "Decks",
+				tabBarIcon: ({ tintColor }) => (
+					<Icon
+						name={`${Platform.OS == "ios" ? "ios" : "md"}-card`}
+						size={30}
+						color={tintColor}
+					/>
+				)
+			}
+		},
+		AddDeck: {
+			screen: AddDeck,
+			navigationOptions: {
+				tabBarLabel: "Add Deck",
+				tabBarIcon: ({ tintColor }) => (
+					<Icon
+						name={`${
+							Platform.OS == "ios" ? "ios" : "md"
+						}-add-circle`}
+						size={30}
+						color={tintColor}
+					/>
+				)
+			}
 		}
 	},
-	AddDeck: {
-		screen: AddDeck,
-		navigationOptions: {
-			tabBarLabel: "Add Deck"
+	{
+		tabBarOptions: {
+			activeTintColor: "#9b0000",
+			inactiveTintColor: "#4A131D"
 		}
 	}
-});
+);
 
 const AppNavigator = createStackNavigator(
 	{
