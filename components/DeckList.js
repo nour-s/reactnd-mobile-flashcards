@@ -19,7 +19,7 @@ class DeckList extends Component {
 				>
 					<View key={key}>
 						<Text style={styles.deckTitle}>{deck.title}</Text>
-						<Text style={styles.deckTitle}>
+						<Text style={styles.deckSubtitle}>
 							{`Cards: ${
 								deck.questions ? deck.questions.length : 0
 							}`}
@@ -41,16 +41,23 @@ const styles = StyleSheet.create({
 	},
 	deck: {
 		flex: 1,
-		backgroundColor: "#aaf",
-		alignItems: "center",
+		backgroundColor: "#fff",
+		alignItems: "flex-start",
 		justifyContent: "center",
 		alignSelf: "stretch",
 		borderBottomColor: "#eee",
-		borderBottomWidth: 1
+		borderBottomWidth: 1,
+		paddingLeft: 30
 	},
 	deckTitle: {
-		fontSize: 21,
-		color: "#fff",
+		fontSize: 30,
+		fontWeight: "bold",
+		color: "#000",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	deckSubtitle: {
+		color: "#000",
 		alignItems: "center",
 		justifyContent: "center"
 	}

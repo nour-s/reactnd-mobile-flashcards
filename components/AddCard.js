@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	TouchableOpacity,
-	TextInput,
-	CheckBox
-} from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { withMappedNavigationProps } from "react-navigation-props-mapper";
 import Actions from "../actions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import TextButton from "./TextButton";
 
 class AddCard extends Component {
 	constructor(props) {
@@ -18,8 +12,7 @@ class AddCard extends Component {
 		this.state = {
 			deckId: props.deckId,
 			question: "",
-			answer: "",
-			isCorrect: true
+			answer: ""
 		};
 	}
 
@@ -47,23 +40,15 @@ class AddCard extends Component {
 					value={this.state.answer}
 					onChangeText={text => this.setState({ answer: text })}
 				/>
-				<CheckBox
-					value={this.state.isCorrect}
-					onValueChange={() => {
-						this.setState({ isCorrect: !this.state.isCorrect });
+				<TextButton
+					style={{
+						wrapper: styles.addCard,
+						text: styles.addCardText
 					}}
-					center
-					title="Is Correct"
-				/>
-				<TouchableOpacity
-					style={styles.addCard}
 					onPress={() => this.handleClick()}
 				>
-					<Text style={styles.addCardText}>Save</Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.addCard}>
-					<Text style={styles.addCardText}>Cancel</Text>
-				</TouchableOpacity>
+					Save
+				</TextButton>
 			</View>
 		);
 	}
@@ -87,7 +72,7 @@ const styles = StyleSheet.create({
 	addCard: {
 		width: 150,
 		height: 50,
-		backgroundColor: "#55f",
+		backgroundColor: "#9b0000",
 		borderRadius: 5,
 		alignItems: "center",
 		justifyContent: "center",

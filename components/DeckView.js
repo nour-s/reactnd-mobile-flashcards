@@ -2,8 +2,20 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { withMappedNavigationProps } from "react-navigation-props-mapper";
+import TextButton from "./TextButton";
 
 class DeckView extends Component {
+	navigateToAddCard = deck =>
+		this.props.navigation.navigate("AddCard", {
+			deckId: deck.id,
+			deckTitle: deck.title
+		});
+
+	navigateToQuiz = deck =>
+		this.props.navigation.navigate("Quiz", {
+			deck
+		});
+
 	render() {
 		const { deckId, decks } = this.props;
 		const deck = decks[deckId];
@@ -13,27 +25,24 @@ class DeckView extends Component {
 				<Text style={styles.cardNubmer}>{`Cards: ${
 					deck.questions ? deck.questions.length : 0
 				}`}</Text>
-				<TouchableOpacity
-					style={styles.addCard}
-					onPress={() =>
-						this.props.navigation.navigate("AddCard", {
-							deckId: deck.id,
-							deckTitle: deck.title
-						})
-					}
+				<TextButton
+					style={{
+						wrapper: styles.addCard,
+						text: styles.addCardText
+					}}
+					onPress={() => this.navigateToAddCard(deck)}
 				>
-					<Text style={styles.addCardText}>Add Card</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					style={styles.addCard}
-					onPress={() =>
-						this.props.navigation.navigate("Quiz", {
-							deck
-						})
-					}
+					Add Card
+				</TextButton>
+				<TextButton
+					style={{
+						wrapper: styles.addCard,
+						text: styles.addCardText
+					}}
+					onPress={() => this.navigateToQuiz(deck)}
 				>
-					<Text style={styles.addCardText}>Start Quiz</Text>
-				</TouchableOpacity>
+					Start Quiz
+				</TextButton>
 			</View>
 		);
 	}
@@ -46,7 +55,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	title: {
-		fontSize: 21,
+		fontSize: 50,
 		fontWeight: "bold"
 	},
 	cardNubmer: {
@@ -55,7 +64,7 @@ const styles = StyleSheet.create({
 	addCard: {
 		width: 150,
 		height: 50,
-		backgroundColor: "#55f",
+		backgroundColor: "#9b0000",
 		borderRadius: 10,
 		alignItems: "center",
 		justifyContent: "center",

@@ -39,26 +39,46 @@ const bottomNavigator = createBottomTabNavigator({
 	}
 });
 
-const AppNavigator = createStackNavigator({
-	Home: {
-		screen: bottomNavigator,
-		navigationOptions: {
-			header: null
+const AppNavigator = createStackNavigator(
+	{
+		Home: {
+			screen: bottomNavigator,
+			navigationOptions: {
+				title: "Home"
+			}
+		},
+		DeckView: {
+			screen: DeckView,
+			navigationOptions: {
+				title: "Deck View"
+			}
+		},
+		AddCard: {
+			screen: AddCard,
+			navigationOptions: {
+				title: "Add card"
+			}
+		},
+		Quiz: {
+			screen: Quiz,
+			navigationOptions: {
+				title: "Quiz"
+			}
 		}
 	},
-	DeckView: {
-		screen: DeckView
-	},
-	AddCard: {
-		screen: AddCard
-	},
-	Quiz: {
-		screen: Quiz,
-		navigationOptions: {
-			tabBarLabel: "Quiz"
+	{
+		initialRouteName: "Home",
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: "#a00037"
+			},
+			headerTintColor: "#fff",
+			headerTitleStyle: {
+				fontWeight: "bold"
+			}
 		}
 	}
-});
+);
 
 const AppContainer = createAppContainer(AppNavigator);
 
@@ -86,14 +106,14 @@ export default class App extends React.Component {
 						<View
 							style={{
 								height: 24,
-								backgroundColor: "#512DA8"
+								backgroundColor: "#a00037"
 							}}
 						/>
 					) : null}
 					<ToolbarAndroid
 						style={{
 							height: 56,
-							backgroundColor: "#673AB7",
+							backgroundColor: "#a00037",
 							elevation: 4
 						}}
 						titleColor="white"

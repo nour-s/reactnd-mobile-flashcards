@@ -39,26 +39,28 @@ class Quiz extends Component {
 					/>
 				)}
 				{showAnswer && (
-					<View>
+					<View style={{ flex: 1, alignSelf: "stretch" }}>
 						<Text>I guessed it:</Text>
-						<TextButton
-							style={{
-								wrapper: styles.buttonBkg,
-								text: styles.buttonText
-							}}
-							onPress={() => this.answered("incorrect")}
-						>
-							Wrong
-						</TextButton>
-						<TextButton
-							style={{
-								wrapper: styles.buttonBkg,
-								text: styles.buttonText
-							}}
-							onPress={() => this.answered("correct")}
-						>
-							Right
-						</TextButton>
+						<View style={styles.answerActions}>
+							<TextButton
+								style={{
+									wrapper: styles.buttonBkg,
+									text: styles.buttonText
+								}}
+								onPress={() => this.answered("incorrect")}
+							>
+								Wrong
+							</TextButton>
+							<TextButton
+								style={{
+									wrapper: styles.buttonBkg,
+									text: styles.buttonText
+								}}
+								onPress={() => this.answered("correct")}
+							>
+								Right
+							</TextButton>
+						</View>
 					</View>
 				)}
 			</View>
@@ -126,6 +128,11 @@ const styles = StyleSheet.create({
 	buttonText: {
 		color: "#fff",
 		fontSize: 21
+	},
+	answerActions: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-around"
 	}
 });
 
