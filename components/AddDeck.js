@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import {
 	StyleSheet,
+	KeyboardAvoidingView,
 	View,
 	Text,
 	TextInput,
-	TouchableOpacity,
 	Keyboard
 } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Actions from "../actions";
+import TextButton from "./TextButton";
 
 class AddDeck extends Component {
 	state = {
@@ -25,7 +26,7 @@ class AddDeck extends Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
+			<KeyboardAvoidingView style={styles.container}>
 				<Text style={styles.title}>What the title of the deck?</Text>
 				<TextInput
 					style={styles.textField}
@@ -33,13 +34,13 @@ class AddDeck extends Component {
 					value={this.state.name}
 					onChangeText={text => this.setState({ name: text })}
 				/>
-				<TouchableOpacity
-					style={styles.save}
+				<TextButton
+					style={{ wrapper: styles.save, text: styles.saveText }}
 					onPress={() => this.handleClick()}
 				>
-					<Text style={styles.saveText}>Save</Text>
-				</TouchableOpacity>
-			</View>
+					Save
+				</TextButton>
+			</KeyboardAvoidingView>
 		);
 	}
 }
@@ -47,8 +48,9 @@ class AddDeck extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center",
-		paddingTop: 15
+		alignItems: "stretch",
+		paddingHorizontal: 20,
+		paddingVertical: 20
 	},
 	title: {
 		fontSize: 21,
@@ -56,17 +58,20 @@ const styles = StyleSheet.create({
 		marginBottom: 20
 	},
 	textField: {
-		width: 200,
-		fontSize: 21
+		fontSize: 21,
+		borderBottomWidth: 1,
+		borderBottomColor: "#D81B37",
+		marginBottom: 20
 	},
 	save: {
 		width: 150,
 		height: 50,
-		backgroundColor: "#55f",
-		borderRadius: 5,
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: 10
+		marginTop: 10,
+		backgroundColor: "#9b0000",
+		borderRadius: 5,
+		alignSelf: "center"
 	},
 	saveText: {
 		color: "#fff",

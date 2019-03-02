@@ -27,7 +27,6 @@ class AddCard extends Component {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>{deckTitle}</Text>
-				<Text style={styles.cardNubmer}>{`Question: `}</Text>
 				<TextInput
 					placeholder="Enter question"
 					style={styles.textField}
@@ -57,8 +56,9 @@ class AddCard extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center",
-		paddingTop: 15
+		alignItems: "stretch",
+		paddingHorizontal: 20,
+		paddingVertical: 20
 	},
 	title: {
 		fontSize: 21,
@@ -76,18 +76,19 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: 10
+		marginTop: 10,
+		alignSelf: "center"
 	},
 	addCardText: {
 		color: "#fff",
 		fontSize: 21
 	},
 	textField: {
-		width: 200,
 		fontSize: 21,
 		height: 30,
 		borderBottomWidth: 1,
-		borderBottomColor: "#eee"
+		borderBottomColor: "#D81B37",
+		marginBottom: 20
 	}
 });
 
