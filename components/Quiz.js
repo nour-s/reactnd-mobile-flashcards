@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 import TextButton from "./TextButton";
 
 class Quiz extends Component {
@@ -10,12 +10,13 @@ class Quiz extends Component {
 		incorrectAnswers: 0
 	};
 
-	answered = what =>
+	answered = what => {
 		this.setState(state => ({
 			[`${what}Answers`]: state[`${what}Answers`] + 1,
 			showAnswer: false,
 			currentCard: state.currentCard + 1
 		}));
+	};
 
 	restartQuiz = () =>
 		this.setState({
@@ -28,40 +29,51 @@ class Quiz extends Component {
 	renderCard = card => {
 		const { showAnswer } = this.state;
 		return (
-			<View style={styles.container}>
-				<Text>{card.question}</Text>
-				{showAnswer && <Text>{card.answer}</Text>}
-				{!showAnswer && (
-					<Button
-						style={{ padding: 10 }}
-						onPress={() => this.setState({ showAnswer: true })}
-						title="Show answer"
-					/>
-				)}
+			<View style={styles.card}>
+				<Text style={styles.question}>{card.question}</Text>
+				<ScrollView style={styles.answerContainer}>
+					{showAnswer && (
+						<Text style={styles.answer}>{card.answer}</Text>
+					)}
+				</ScrollView>
 				{showAnswer && (
-					<View style={{ flex: 1, alignSelf: "stretch" }}>
-						<Text>I guessed it:</Text>
-						<View style={styles.answerActions}>
-							<TextButton
-								style={{
-									wrapper: styles.buttonBkg,
-									text: styles.buttonText
-								}}
-								onPress={() => this.answered("incorrect")}
-							>
-								Wrong
-							</TextButton>
-							<TextButton
-								style={{
-									wrapper: styles.buttonBkg,
-									text: styles.buttonText
-								}}
-								onPress={() => this.answered("correct")}
-							>
-								Right
-							</TextButton>
-						</View>
+					<View style={styles.answerActions}>
+						<TextButton
+							style={{
+								wrapper: [
+									styles.btnBkg,
+									styles.btnAnswerIncorrect
+								],
+								text: styles.btnText
+							}}
+							onPress={() => this.answered("incorrect")}
+						>
+							Wrong
+						</TextButton>
+						<TextButton
+							style={{
+								wrapper: [
+									styles.btnBkg,
+									styles.btnAnswerCorrect
+								],
+								text: styles.btnText
+							}}
+							onPress={() => this.answered("correct")}
+						>
+							Right
+						</TextButton>
 					</View>
+				)}
+				{!showAnswer && (
+					<TextButton
+						style={{
+							wrapper: [styles.btnBkg, styles.btnShowAnswer],
+							text: styles.btnText
+						}}
+						onPress={() => this.setState({ showAnswer: true })}
+					>
+						Show answer
+					</TextButton>
 				)}
 			</View>
 		);
@@ -77,8 +89,8 @@ class Quiz extends Component {
 				</Text>
 				<TextButton
 					style={{
-						wrapper: styles.buttonBkg,
-						text: styles.buttonText
+						wrapper: styles.btnBkg,
+						text: styles.btnText
 					}}
 					onPress={() => this.restartQuiz()}
 				>
@@ -86,8 +98,8 @@ class Quiz extends Component {
 				</TextButton>
 				<TextButton
 					style={{
-						wrapper: styles.buttonBkg,
-						text: styles.buttonText
+						wrapper: [styles.btnBkg, styles.btnShowAnswer],
+						text: styles.btnText
 					}}
 					onPress={() => this.props.navigation.goBack()}
 				>
@@ -102,7 +114,7 @@ class Quiz extends Component {
 		const { currentCard } = this.state;
 		const allAnswered = currentCard > deck.questions.length - 1;
 		return (
-			<View>
+			<View style={styles.container}>
 				{!allAnswered
 					? this.renderCard(deck.questions[currentCard])
 					: this.renderQuizEnd()}
@@ -113,21 +125,56 @@ class Quiz extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: "center",
-		alignItems: "center"
+		flex: 1
 	},
-	buttonBkg: {
+	card: {
+		flex: 1,
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: "#eee",
+		marginVertical: 10,
+		marginHorizontal: 10,
+		paddingVertical: 20,
+		paddingHorizontal: 20
+	},
+	answerContainer: {},
+	question: {
+		fontSize: 30,
+		fontWeight: "bold",
+		marginBottom: 5
+	},
+	answer: {
+		fontSize: 30,
+		fontWeight: "bold",
+		color: "#444",
+		marginBottom: 5
+	},
+	btnBkg: {
 		width: 150,
 		height: 50,
-		backgroundColor: "#55f",
+		backgroundColor: "#9b0000",
 		borderRadius: 10,
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 10
 	},
-	buttonText: {
+	btnText: {
 		color: "#fff",
 		fontSize: 21
+	},
+	btnShowAnswer: {
+		width: undefined,
+		alignSelf: "stretch"
+	},
+	btnAnswerCorrect: {
+		borderTopLeftRadius: 0,
+		borderBottomLeftRadius: 0,
+		borderLeftWidth: 1,
+		borderLeftColor: "#fff"
+	},
+	btnAnswerIncorrect: {
+		borderTopRightRadius: 0,
+		borderBottomRightRadius: 0
 	},
 	answerActions: {
 		display: "flex",
