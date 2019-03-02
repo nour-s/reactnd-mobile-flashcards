@@ -8,7 +8,8 @@ Built during [Udacity React Nanodegree Program](https://www.udacity.com/course/r
 
 # Screenshot
 
-![Mobile Flashcards Screenshot](/assets/screenshot.jpg?raw=true)
+<img src="/assets/screenshot.jpg?raw=true" width="200">
+<img src="/assets/screenshot2.jpg?raw=true" width="200">
 
 ## Getting Started via Yarn
 
